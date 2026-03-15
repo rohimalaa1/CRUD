@@ -46,4 +46,21 @@ app.get("/product/:id",async(req,res)=>{
     })
 })
 
+app.delete('/product',async (req,res)=>{
+    const {id}=req.body
+    const product=await productModel.findByIdAndDelete(id)
+    .then(()=>{
+        res.json({
+            message:"success",
+            data:product
+        })
+    }).catch((err)=>{
+        res.json({
+            message:"error",
+            error:err
+        })
+    })
+    
+})
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
